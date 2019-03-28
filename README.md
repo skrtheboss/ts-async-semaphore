@@ -1,13 +1,11 @@
 [![Build Status][build-status-image]][build-status-url]
 [![Coverage Status][coverage-image]][coverage-url]
 [![MIT License][license-image]][license-url]
-
+[![NPM Package][npm-version-image]][npm-url]
+[![NPM Package Downloads][npm-downloads-image]][npm-url]
 # Async Semaphore
 
 A counting semaphore based on Java's Concurrent Semaphore.
-
-
-[![https://nodei.co/npm/harperdb-connect.png?downloads=true&downloadRank=true&stars=true](https://nodei.co/npm/harperdb-connect.png?downloads=true&downloadRank=true&stars=true)](https://www.npmjs.com/package/harperdb-connect)
 
 ## Install
 
@@ -152,8 +150,8 @@ Returns: `Boolean` Promise `true` if success, `false` false if fail
 
 [build-status-image]: https://circleci.com/gh/skrtheboss/ts-async-semaphore.svg?style=svg
 [build-status-url]: https://circleci.com/gh/skrtheboss/ts-async-semaphore
-[coverage-image]: https://coveralls.io/repos/github/Ethan-Arrowood/ts-async-semaphore/badge.svg?branch=master
-[coverage-url]: https://coveralls.io/github/Ethan-Arrowood/ts-async-semaphore?branch=master
+[coverage-image]: https://codecov.io/gh/skrtheboss/ts-async-semaphore/branch/master/graph/badge.svg
+[coverage-url]: https://codecov.io/gh/skrtheboss/ts-async-semaphore
 [npm-url]: https://npmjs.org/package/ts-async-semaphore
 [npm-version-image]: http://img.shields.io/npm/v/ts-async-semaphore.svg?style=flat
 [npm-downloads-image]: http://img.shields.io/npm/dm/ts-async-semaphore.svg?style=flat
