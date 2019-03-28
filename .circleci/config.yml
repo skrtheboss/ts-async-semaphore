@@ -71,7 +71,7 @@ jobs:
         - store_test_results:
             path: reports/junit
 
-    doc:
+    test:
         <<: *job-defaults
         steps:
         - *attach-workspace
@@ -80,7 +80,7 @@ jobs:
         - store_test_results:
             path: reports/junit
 
-    test:
+    doc:
         <<: *job-defaults
         steps:
         - *attach-workspace
