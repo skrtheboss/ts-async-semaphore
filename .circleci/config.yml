@@ -29,7 +29,7 @@ aliases:
     - &save-cache
         name: Save Yarn Package Cache
         paths: node_modules
-        key: v2-dependencies-{{ .Branch }}-{{ checksum "yarn.lock" }}
+        key: yarn-packages-{{ .Branch }}-{{ checksum "yarn.lock" }}
 
     # Branch filter that can be specified for jobs that should only run on publish branches
     # (e.g. master )
@@ -71,15 +71,23 @@ jobs:
         - store_test_results:
             path: reports/junit
 
-    test:
+    doc:
         <<: *job-defaults
-        resource_class: xlarge
         steps:
         - *attach-workspace
         - run:
             command: yarn test:ci
         - store_test_results:
             path: reports/junit
+
+    test:
+        <<: *job-defaults
+        steps:
+        - *attach-workspace
+        - run:
+            command: yarn doc
+        - store_artifacts:
+            path: docs
 
     build:
         <<: *job-defaults
@@ -97,6 +105,9 @@ workflows:
             requires:
             - setup
         - test:
+            requires:
+            - setup
+        - doc:
             requires:
             - setup
         - build:

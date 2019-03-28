@@ -1,6 +1,7 @@
 /node_modules
 /dist
-/reports
+/coverage
 /docs
+/reports
 /.idea
 yarn-error.log

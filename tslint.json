@@ -110,7 +110,8 @@
             "allow-pascal-case"
         ],
         "whitespace": true,
-        "no-inferrable-types": true
+        "no-inferrable-types": true,
+        "unified-signatures": false
     },
     "rulesDirectory": []
 }

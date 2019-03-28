@@ -30,7 +30,7 @@ export class Semaphore {
      *        This value may be negative, in which case releases
      *        must occur before any acquires will be granted.
      */
-    constructor(permits: number) ;
+    constructor(permits: number);
     /**
      * Creates a {@code Semaphore} with the given number of
      * permits and the given fairness setting.
@@ -41,6 +41,7 @@ export class Semaphore {
      * @param fair {@code true} if this semaphore will guarantee
      *        first-in first-out granting of permits under contention,
      *        else {@code false}
+     *
      */
     constructor(permits: number, fair: boolean);
     constructor(permits = 0, fair = false) {
@@ -110,7 +111,7 @@ export class Semaphore {
      *
      * @return {@code true} if a permit was acquired and {@code false} otherwise
      */
-    public tryAcquire(): Promise<boolean>
+    public tryAcquire(): Promise<boolean>;
     /**
      * Acquires the given number of permits from this semaphore, only
      * if all are available at the time of invocation.
@@ -118,7 +119,7 @@ export class Semaphore {
      * @param permits the number of permits to acquire
      * @return {@code true} if the permits were acquired and{@code false} otherwise
      */
-    public tryAcquire(permits: number): Promise<boolean>
+    public tryAcquire(permits: number): Promise<boolean>;
     /**
      * Acquires the given number of permits from this semaphore, if all
      * become available within the given waiting time.
@@ -128,7 +129,7 @@ export class Semaphore {
      * @return {@code true} if all permits were acquired and {@code false}
      *         if the waiting time elapsed before all permits were acquired
      */
-    public tryAcquire(permits: number, timeoutMs: number): Promise<boolean>
+    public tryAcquire(permits: number, timeoutMs: number): Promise<boolean>;
 
     public async tryAcquire(permits = 1, timeoutMs?: number): Promise<boolean> {
         checkValidPermits(permits);
@@ -162,7 +163,7 @@ export class Semaphore {
                 return true;
             })
         ]);
-    };
+    }
 
     /**
      * Releases a permit, returning it to the semaphore.
@@ -205,7 +206,7 @@ export class Semaphore {
     public acquire(permits: number): Promise<void>;
     public async acquire(permits = 1): Promise<void> {
         checkValidPermits(permits);
-        await this.getAcquirePromise(permits).promise
+        await this.getAcquirePromise(permits).promise;
     }
 
     /**
@@ -216,9 +217,7 @@ export class Semaphore {
         // if no available permits
         if (!this.available) {
             return;
-        }
-        // no queued acquirers
-        else if (!this.acquirers.length) {
+        } else if (!this.acquirers.length) {
             return;
         }
 
@@ -242,12 +241,16 @@ export class Semaphore {
             len--;
             this.available -= acquirer.permits;
 
-            // for scope handling for non-blocking calling
-            (function (handler) {
+            /**
+             * for scope handling for non-blocking calling
+             */
+            function next(handler) {
                 process.nextTick(function callAcquirer() {
                     handler.call(this, true);
                 });
-            })(acquirer.handler);
+            }
+
+            (next)(acquirer.handler);
         }
     }
 

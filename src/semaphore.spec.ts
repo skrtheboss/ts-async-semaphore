@@ -1,4 +1,4 @@
-import {Semaphore} from "./semaphore";
+import {Semaphore} from './semaphore';
 
 
 const awaitTime = (ms: number) => new Promise(resolve => setTimeout(resolve, ms));
@@ -24,13 +24,13 @@ describe('Semaphore', () => {
 
     test('expect acquire() should wait till permits are available', async done => {
         const semaphore = new Semaphore(0);
-        let test = jest.fn();
+        const test = jest.fn();
 
         expect(await semaphore.tryAcquire()).toBeFalsy();
 
         semaphore.acquire().then(() => {
             expect(test).toBeCalled();
-            done()
+            done();
         });
 
         expect(semaphore.hasQueuedAcquirers()).toBeTruthy();
