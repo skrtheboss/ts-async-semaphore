@@ -42,7 +42,7 @@ aliases:
     # `build-npm-packages`.
     # https://circleci.com/docs/2.0/workflows/#using-workspaces-to-share-data-among-jobs
     # https://circleci.com/blog/deep-diving-into-circleci-workspaces/
-    - &attach_workspace
+    - &attach-workspace
         attach_workspace:
             at: ~/
 
@@ -52,9 +52,9 @@ jobs:
         <<: *job-defaults
         steps:
         - checkout
-        - restore-cache: *restore-cache
+        - restore_cache: *restore-cache
         - *yarn-install
-        - save-cache: *save-cache
+        - save_cache: *save-cache
         # Persist any changes at this point to be reused by further jobs.
         # **NOTE 1 **: Folders persisted here should be kept in sync with `var_13: &attach_workspace`.
         # **NOTE 2 **: To add new content to the workspace, always persist on the same root.
@@ -66,7 +66,7 @@ jobs:
     lint:
         <<: *job-defaults
         steps:
-        - *attach_workspace
+        - *attach-workspace
         - run: yarn lint --format junit -o reports/junit/js-lint-results.xml
         - store_test_results:
             path: reports/junit
@@ -75,7 +75,7 @@ jobs:
         <<: *job-defaults
         resource_class: xlarge
         steps:
-        - *attach_workspace
+        - *attach-workspace
         - run:
             command: yarn test:ci
         - store_test_results:
@@ -84,7 +84,7 @@ jobs:
     build:
         <<: *job-defaults
         steps:
-        - *attach_workspace
+        - *attach-workspace
         - run:
             command: yarn build
 
