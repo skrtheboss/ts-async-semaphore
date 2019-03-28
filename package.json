@@ -1,0 +1,63 @@
+{
+    "name": "ts-async-semaphore",
+    "version": "0.0.0",
+    "description": "A counting semaphore for node based on Java's Sempahore.",
+    "main": "dist/semaphore.js",
+    "types": "dist/semaphore.d.ts",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/skrtheboss/ts-async-semaphore.git"
+    },
+    "author": "Denis Frenademetz",
+    "license": "MIT",
+    "private": false,
+    "bugs": {
+        "url": "https://github.com/skrtheboss/ts-async-semaphore/issues"
+    },
+    "homepage": "https://github.com/skrtheboss/ts-async-semaphore#readme",
+    "keywords": [
+        "semaphore",
+        "async",
+        "await",
+        "async-semaphore",
+        "ts-async-semaphore",
+        "permits-semaphore",
+        "credits-semaphore",
+        "typescript",
+        "java",
+        "java-semaphore",
+        "concurrent"
+    ],
+    "scripts": {
+        "serve": "tsc -w",
+        "build": " tsc",
+        "lint": "tslint src/**/*.ts",
+        "check-dependencies": "dependency-check package.json --no-dev --quiet",
+        "test:dev": "jest",
+        "test": "jest --coverage && codecov",
+        "clean": "shx rm -rf node_modules/ dist/ docs/ coverage/",
+        "doc": "typedoc --out docs --name ts-async-semaphore --tsconfig tsconfig.json",
+        "version": "yarn run version:changelog && git add CHANGELOG.md",
+        "version:changelog": "conventional-changelog -p angular -i CHANGELOG.md -s",
+        "posttypedoc": "shx cp .nojekyll docs/.nojekyll"
+    },
+    "engines": {
+        "node": ">=8.0.0"
+    },
+    "dependencies": {
+        "@types/node": "^8.0.0"
+    },
+    "devDependencies": {
+        "@types/jest": "^24.0.0",
+        "codecov": "^3.2.0",
+        "conventional-changelog-cli": "^2.0.11",
+        "dependency-check": "^3.3.0",
+        "jest": "^24.1.0",
+        "rimraf": "^2.6.3",
+        "shx": "^0.2.2",
+        "ts-jest": "^24.0.0",
+        "tslint": "^5.11.0",
+        "typedoc": "^0.14.2",
+        "typescript": "^3.3.1"
+    }
+}

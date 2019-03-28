@@ -1,0 +1,104 @@
+orbs:
+    codecov: codecov/codecov@1.0.4
+
+aliases:
+    - &job-defaults
+        working_directory: ~/semaphore
+        docker:
+        # specify the version you desire here
+        - image: circleci/node:8.15
+
+    - &yarn-install
+        run:
+            name: Running Yarn install
+            command: |
+                # Yarn's requests sometimes take more than 10mins to complete.
+                # Print something to stdout, to prevent CircleCI from failing due to not output.
+                while true; do sleep 60; echo "[`date`] Keeping alive..."; done &
+                KEEP_ALIVE_PID=$!
+                yarn install --frozen-lockfile --non-interactive
+                kill $KEEP_ALIVE_PID
+
+    - &restore-cache
+        name: Restore Yarn Package Cache
+        keys:
+        - yarn-packages-{{ .Branch }}-{{ checksum "yarn.lock" }}
+        # Fallback in case checksum fails
+        - yarn-packages-{{ .Branch }}-
+
+    - &save-cache
+        name: Save Yarn Package Cache
+        paths: node_modules
+        key: v2-dependencies-{{ .Branch }}-{{ checksum "yarn.lock" }}
+
+    # Branch filter that can be specified for jobs that should only run on publish branches
+    # (e.g. master )
+    - &publish_branches_filter
+        branches:
+            only:
+            - master
+
+    # Workspace initially persisted by the `install` job, and then enhanced by `test_aio` and
+    # `build-npm-packages`.
+    # https://circleci.com/docs/2.0/workflows/#using-workspaces-to-share-data-among-jobs
+    # https://circleci.com/blog/deep-diving-into-circleci-workspaces/
+    - &attach_workspace
+        attach_workspace:
+            at: ~/
+
+version: 2.1
+jobs:
+    setup:
+        <<: *job-defaults
+        steps:
+        - checkout
+        - restore-cache: *restore-cache
+        - *yarn-install
+        - save-cache: *save-cache
+        # Persist any changes at this point to be reused by further jobs.
+        # **NOTE 1 **: Folders persisted here should be kept in sync with `var_13: &attach_workspace`.
+        # **NOTE 2 **: To add new content to the workspace, always persist on the same root.
+        - persist_to_workspace:
+            root: ~/
+            paths:
+            - ./semaphore
+
+    lint:
+        <<: *job-defaults
+        steps:
+        - *attach_workspace
+        - run: yarn lint --format junit -o reports/junit/js-lint-results.xml
+        - store_test_results:
+            path: reports/junit
+
+    test:
+        <<: *job-defaults
+        resource_class: xlarge
+        steps:
+        - *attach_workspace
+        - run:
+            command: yarn test:ci
+        - store_test_results:
+            path: reports/junit
+
+    build:
+        <<: *job-defaults
+        steps:
+        - *attach_workspace
+        - run:
+            command: yarn build
+
+workflows:
+    version: 2
+    default_workflow:
+        jobs:
+        - setup
+        - lint:
+            requires:
+            - setup
+        - test:
+            requires:
+            - setup
+        - build:
+            requires:
+            - setup
