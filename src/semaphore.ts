@@ -7,6 +7,7 @@ interface Acquirer {
 
 function checkValidPermits(permits): void {
     if (permits < 0) throw new TypeError('Permits can not be below 0!');
+
 }
 
 /**
