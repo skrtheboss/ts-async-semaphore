@@ -79,6 +79,8 @@ jobs:
             command: yarn test:ci
         - store_test_results:
             path: reports/junit
+        - codecov/upload:
+            file: coverage/*.json
 
     doc:
         <<: *job-defaults
