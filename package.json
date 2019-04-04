@@ -34,12 +34,11 @@
         "lint": "tslint src/**/*.ts",
         "check-dependencies": "dependency-check package.json --no-dev --quiet",
         "test": "jest",
-        "test:ci": "jest --coverage --config jest.config.ci.js && codecov",
+        "test:ci": "jest --ci --runInBand --coverage --config jest.config.ci.js && codecov",
         "clean": "shx rm -rf node_modules/ dist/ docs/ coverage/",
         "doc": "typedoc --out docs --name ts-async-semaphore --tsconfig tsconfig.json",
         "version": "yarn run version:changelog && git add CHANGELOG.md",
-        "version:changelog": "conventional-changelog -p angular -i CHANGELOG.md -s",
-        "posttypedoc": "shx cp .nojekyll docs/.nojekyll"
+        "version:changelog": "conventional-changelog -p angular -i CHANGELOG.md -s"
     },
     "engines": {
         "node": ">=8.0.0"
