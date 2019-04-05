@@ -81,6 +81,7 @@ jobs:
             path: reports/junit
         - codecov/upload:
             file: coverage/*.json
+            flags: unittests
 
     doc:
         <<: *job-defaults
