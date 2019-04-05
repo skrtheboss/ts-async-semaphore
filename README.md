@@ -148,8 +148,8 @@ Returns: `Boolean` Promise `true` if success, `false` false if fail
 [license-image]: http://img.shields.io/badge/license-MIT-blue.svg?style=flat
 [license-url]: LICENSE
 
-[build-status-image]: https://circleci.com/gh/skrtheboss/ts-async-semaphore.svg?style=svg
-[build-status-url]: https://circleci.com/gh/skrtheboss/ts-async-semaphore
+[build-status-image]: https://circleci.com/gh/skrtheboss/ts-async-semaphore/tree/master.svg?style=svg
+[build-status-url]: https://circleci.com/gh/skrtheboss/ts-async-semaphore/tree/master
 [coverage-image]: https://codecov.io/gh/skrtheboss/ts-async-semaphore/branch/master/graph/badge.svg
 [coverage-url]: https://codecov.io/gh/skrtheboss/ts-async-semaphore
 [npm-url]: https://npmjs.org/package/ts-async-semaphore
