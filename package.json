@@ -56,7 +56,7 @@
         "jest-silent-reporter": "0.1.2",
         "rimraf": "2.6.3",
         "shx": "0.3.2",
-        "ts-jest": "24.0.0",
+        "ts-jest": "24.0.2",
         "tslint": "5.15.0",
         "typedoc": "0.14.2",
         "typescript": "3.3.3333"
