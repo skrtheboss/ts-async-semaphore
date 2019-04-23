@@ -1,6 +1,7 @@
 [![Build Status][build-status-image]][build-status-url]
 [![Coverage Status][coverage-image]][coverage-url]
 [![MIT License][license-image]][license-url]
+[![Renovate enabled][renovate-image]][renovate-url]
 [![NPM Package][npm-version-image]][npm-url]
 [![NPM Package Downloads][npm-downloads-image]][npm-url]
 # Async Semaphore
@@ -152,6 +153,8 @@ Returns: `Boolean` Promise `true` if success, `false` false if fail
 [build-status-url]: https://circleci.com/gh/skrtheboss/ts-async-semaphore/tree/master
 [coverage-image]: https://codecov.io/gh/skrtheboss/ts-async-semaphore/branch/master/graph/badge.svg
 [coverage-url]: https://codecov.io/gh/skrtheboss/ts-async-semaphore
+[renovate-image]: https://img.shields.io/badge/renovate-enabled-brightgreen.svg
+[renovate-url]: https://renovatebot.com/
 [npm-url]: https://npmjs.org/package/ts-async-semaphore
 [npm-version-image]: http://img.shields.io/npm/v/ts-async-semaphore.svg?style=flat
 [npm-downloads-image]: http://img.shields.io/npm/dm/ts-async-semaphore.svg?style=flat
