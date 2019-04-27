@@ -83,6 +83,13 @@ jobs:
             file: coverage/*.json
             flags: unittests
 
+    check-dependencies:
+        <<: *job-defaults
+        steps:
+        - *attach-workspace
+        - run:
+            command: yarn check-dependencies
+
     doc:
         <<: *job-defaults
         steps:
@@ -98,6 +105,17 @@ jobs:
         - *attach-workspace
         - run:
             command: yarn build
+
+    release:
+        <<: *job-defaults
+        branches:
+            only:
+            - master
+            - /rc-.*/
+        steps:
+        - *attach-workspace
+        - run:
+              command: yarn semantic-release
 
 workflows:
     version: 2
@@ -116,3 +134,13 @@ workflows:
         - build:
             requires:
             - setup
+        - check-dependencies:
+            requires:
+            - setup
+        - release:
+            requires:
+            - lint
+            - test
+            - doc
+            - build
+            - check-dependencies

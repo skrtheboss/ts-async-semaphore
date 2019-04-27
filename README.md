@@ -1,6 +1,7 @@
 [![Build Status][build-status-image]][build-status-url]
 [![Coverage Status][coverage-image]][coverage-url]
 [![MIT License][license-image]][license-url]
+[![semantic-release][semantic-release-image]][semantic-release-url]
 [![Renovate enabled][renovate-image]][renovate-url]
 [![NPM Package][npm-version-image]][npm-url]
 [![NPM Package Downloads][npm-downloads-image]][npm-url]
@@ -155,6 +156,8 @@ Returns: `Boolean` Promise `true` if success, `false` false if fail
 [coverage-url]: https://codecov.io/gh/skrtheboss/ts-async-semaphore
 [renovate-image]: https://img.shields.io/badge/renovate-enabled-brightgreen.svg
 [renovate-url]: https://renovatebot.com/
+[semantic-release-image]: https://img.shields.io/badge/%20%20%F0%9F%93%A6%F0%9F%9A%80-semantic--release-e10079.svg
+[semantic-release-url]: https://github.com/semantic-release/semantic-release
 [npm-url]: https://npmjs.org/package/ts-async-semaphore
 [npm-version-image]: http://img.shields.io/npm/v/ts-async-semaphore.svg?style=flat
 [npm-downloads-image]: http://img.shields.io/npm/dm/ts-async-semaphore.svg?style=flat
