@@ -89,6 +89,8 @@ jobs:
         steps:
             - *attach-workspace
             - run:
+                command: ls -la
+            - run:
                 command: yarn check-dependencies
 
     doc:
