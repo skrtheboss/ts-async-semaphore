@@ -133,7 +133,7 @@ workflows:
                     - setup
             - check-dependencies:
                 requires:
-                    - setup
+                    - build
             - release:
                 filters:
                     *release_branches_filter
