@@ -5,8 +5,8 @@ aliases:
     - &job-defaults
         working_directory: ~/semaphore
         docker:
-        # specify the version you desire here
-        - image: circleci/node:8.16
+            # specify the version you desire here
+            - image: circleci/node:8.16
 
     - &yarn-install
         run:
@@ -22,9 +22,9 @@ aliases:
     - &restore-cache
         name: Restore Yarn Package Cache
         keys:
-        - yarn-packages-{{ .Branch }}-{{ checksum "yarn.lock" }}
-        # Fallback in case checksum fails
-        - yarn-packages-{{ .Branch }}-
+            - yarn-packages-{{ .Branch }}-{{ checksum "yarn.lock" }}
+            # Fallback in case checksum fails
+            - yarn-packages-{{ .Branch }}-
 
     - &save-cache
         name: Save Yarn Package Cache
@@ -33,10 +33,11 @@ aliases:
 
     # Branch filter that can be specified for jobs that should only run on publish branches
     # (e.g. master )
-    - &publish_branches_filter
+    - &release_branches_filter
         branches:
             only:
-            - master
+                - master
+                - /rc-.*/
 
     # Workspace initially persisted by the `install` job, and then enhanced by `test_aio` and
     # `build-npm-packages`.
@@ -51,96 +52,94 @@ jobs:
     setup:
         <<: *job-defaults
         steps:
-        - checkout
-        - restore_cache: *restore-cache
-        - *yarn-install
-        - save_cache: *save-cache
-        # Persist any changes at this point to be reused by further jobs.
-        # **NOTE 1 **: Folders persisted here should be kept in sync with `var_13: &attach_workspace`.
-        # **NOTE 2 **: To add new content to the workspace, always persist on the same root.
-        - persist_to_workspace:
-            root: ~/
-            paths:
-            - ./semaphore
+            - checkout
+            - restore_cache: *restore-cache
+            - *yarn-install
+            - save_cache: *save-cache
+            # Persist any changes at this point to be reused by further jobs.
+            # **NOTE 1 **: Folders persisted here should be kept in sync with `var_13: &attach_workspace`.
+            # **NOTE 2 **: To add new content to the workspace, always persist on the same root.
+            - persist_to_workspace:
+                root: ~/
+                paths:
+                - ./semaphore
 
     lint:
         <<: *job-defaults
         steps:
-        - *attach-workspace
-        - run: yarn lint --format junit -o reports/junit/js-lint-results.xml
-        - store_test_results:
-            path: reports/junit
+            - *attach-workspace
+            - run: yarn lint --format junit -o reports/junit/js-lint-results.xml
+            - store_test_results:
+                path: reports/junit
 
     test:
         <<: *job-defaults
         steps:
-        - *attach-workspace
-        - run:
-            command: yarn test:ci
-        - store_test_results:
-            path: reports/junit
-        - codecov/upload:
-            file: coverage/*.json
-            flags: unittests
+            - *attach-workspace
+            - run:
+                command: yarn test:ci
+            - store_test_results:
+                path: reports/junit
+            - codecov/upload:
+                file: coverage/*.json
+                flags: unittests
 
     check-dependencies:
         <<: *job-defaults
         steps:
-        - *attach-workspace
-        - run:
-            command: yarn check-dependencies
+            - *attach-workspace
+            - run:
+                command: yarn check-dependencies
 
     doc:
         <<: *job-defaults
         steps:
-        - *attach-workspace
-        - run:
-            command: yarn doc
-        - store_artifacts:
-            path: docs
+            - *attach-workspace
+            - run:
+                command: yarn doc
+            - store_artifacts:
+                path: docs
 
     build:
         <<: *job-defaults
         steps:
-        - *attach-workspace
-        - run:
-            command: yarn build
+            - *attach-workspace
+            - run:
+                command: yarn build
 
     release:
         <<: *job-defaults
-        branches:
-            only:
-            - master
-            - /rc-.*/
         steps:
-        - *attach-workspace
-        - run:
-              command: yarn semantic-release
+            - *attach-workspace
+            - run:
+                  command: yarn semantic-release
 
 workflows:
     version: 2
     default_workflow:
         jobs:
-        - setup
-        - lint:
-            requires:
             - setup
-        - test:
-            requires:
-            - setup
-        - doc:
-            requires:
-            - setup
-        - build:
-            requires:
-            - setup
-        - check-dependencies:
-            requires:
-            - setup
-        - release:
-            requires:
-            - lint
-            - test
-            - doc
-            - build
-            - check-dependencies
+            - lint:
+                requires:
+                    - setup
+            - test:
+                requires:
+                    - setup
+            - doc:
+                requires:
+                    - setup
+            - build:
+                requires:
+                    - setup
+            - check-dependencies:
+                requires:
+                    - setup
+            - release:
+                filters:
+                    *release_branches_filter
+                requires:
+                    - lint
+                    - test
+                    - doc
+                    - build
+                    - check-dependencies
