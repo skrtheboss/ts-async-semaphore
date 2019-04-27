@@ -1,6 +1,6 @@
 {
     "name": "ts-async-semaphore",
-    "version": "0.0.0",
+    "version": "0.0.0-development",
     "description": "A counting semaphore for node based on Java's Sempahore.",
     "main": "dist/semaphore.js",
     "types": "dist/semaphore.d.ts",
@@ -8,6 +8,9 @@
         "type": "git",
         "url": "https://github.com/skrtheboss/ts-async-semaphore.git"
     },
+    "contributors": [
+        "Denis Frenademetz (https://github.com/skrtheboss)"
+    ],
     "author": "Denis Frenademetz",
     "license": "MIT",
     "private": false,
@@ -37,8 +40,7 @@
         "test:ci": "jest --ci --runInBand --coverage --config jest.config.ci.js && codecov",
         "clean": "shx rm -rf node_modules/ dist/ docs/ coverage/",
         "doc": "typedoc --out docs --name ts-async-semaphore --tsconfig tsconfig.json",
-        "version": "yarn run version:changelog && git add CHANGELOG.md",
-        "version:changelog": "conventional-changelog -p angular -i CHANGELOG.md -s"
+        "semantic-release": "semantic-release"
     },
     "engines": {
         "node": ">=8.0.0"
@@ -47,18 +49,20 @@
         "@types/node": "^8.0.0"
     },
     "devDependencies": {
+        "@semantic-release/changelog": "^3.0.2",
         "@types/jest": "24.0.11",
-        "codecov": "3.2.0",
-        "conventional-changelog-cli": "2.0.12",
+        "codecov": "3.3.0",
+        "condition-circle": "^2.0.2",
         "dependency-check": "3.3.0",
-        "jest": "24.3.1",
+        "jest": "24.7.1",
         "jest-junit": "6.3.0",
         "jest-silent-reporter": "0.1.2",
         "rimraf": "2.6.3",
-        "shx": "0.2.2",
-        "ts-jest": "24.0.0",
-        "tslint": "5.13.1",
+        "semantic-release": "15.13.3",
+        "shx": "0.3.2",
+        "ts-jest": "24.0.2",
+        "tslint": "5.16.0",
         "typedoc": "0.14.2",
-        "typescript": "3.3.3333"
+        "typescript": "3.4.5"
     }
 }
