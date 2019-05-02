@@ -55,7 +55,7 @@
         "condition-circle": "2.0.2",
         "dependency-check": "3.3.0",
         "jest": "24.7.1",
-        "jest-junit": "6.3.0",
+        "jest-junit": "6.4.0",
         "jest-silent-reporter": "0.1.2",
         "rimraf": "2.6.3",
         "semantic-release": "15.13.3",
