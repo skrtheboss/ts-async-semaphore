@@ -58,7 +58,7 @@
         "jest-junit": "6.4.0",
         "jest-silent-reporter": "0.1.2",
         "rimraf": "2.6.3",
-        "semantic-release": "15.13.3",
+        "semantic-release": "15.13.12",
         "shx": "0.3.2",
         "ts-jest": "24.0.2",
         "tslint": "5.16.0",
