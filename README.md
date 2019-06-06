@@ -1,3 +1,4 @@
+[![Github Image][github-image]][github-url]
 [![Build Status][build-status-image]][build-status-url]
 [![Coverage Status][coverage-image]][coverage-url]
 [![MIT License][license-image]][license-url]
@@ -147,9 +148,10 @@ Acquires the given number of permits from this semaphore.
 
 Returns: `Boolean` Promise `true` if success, `false` false if fail
 
+[github-image]: https://repository-images.githubusercontent.com/174854938/43fd2380-7682-11e9-92bf-8d162736f579
+[github-url]: https://repository-images.githubusercontent.com/174854938/43fd2380-7682-11e9-92bf-8d162736f579
 [license-image]: http://img.shields.io/badge/license-MIT-blue.svg?style=flat
 [license-url]: LICENSE
-
 [build-status-image]: https://circleci.com/gh/skrtheboss/ts-async-semaphore/tree/master.svg?style=svg
 [build-status-url]: https://circleci.com/gh/skrtheboss/ts-async-semaphore/tree/master
 [coverage-image]: https://codecov.io/gh/skrtheboss/ts-async-semaphore/branch/master/graph/badge.svg
