@@ -6,7 +6,7 @@ aliases:
         working_directory: ~/semaphore
         docker:
             # specify the version you desire here
-            - image: circleci/node:12.12
+            - image: circleci/node:12.13
 
     - &yarn-install
         run:
