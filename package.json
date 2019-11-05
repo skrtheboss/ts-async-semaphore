@@ -50,7 +50,7 @@
     },
     "devDependencies": {
         "@semantic-release/changelog": "^3.0.5",
-        "@types/jest": "^24.0.21",
+        "@types/jest": "^24.0.22",
         "codecov": "^3.6.1",
         "condition-circle": "^2.0.2",
         "dependency-check": "^4.1.0",
