@@ -1,12 +1,10 @@
-import {Semaphore} from './semaphore';
-
+import { Semaphore } from './semaphore';
 
 const awaitTime = (ms: number) => new Promise(resolve => setTimeout(resolve, ms));
 
 jest.setTimeout(20);
 
 describe('Semaphore', () => {
-
     test('new Semaphore should create non-fair semaphore', () => {
         const semaphore = new Semaphore();
         expect(semaphore.isFair()).toBeFalsy();
@@ -85,7 +83,6 @@ describe('Semaphore', () => {
         semaphore.release();
 
         expect(semaphore.getQueueLength()).toEqual(1);
-
     });
 
     test('expect getQueueLength() in fair mode to return correct values', async () => {
