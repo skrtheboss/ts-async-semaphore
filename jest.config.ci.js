@@ -1,8 +1,8 @@
 module.exports = {
     ...require('./jest.config'),
-    coverageReporters: ['json'],
+    coverageReporters: ['text-lcov'],
     reporters: [
-        ['jest-junit', {output: 'reports/junit/js-test-results.xml'}],
+        ['jest-junit', {outputDirectory: 'reports/jest', outputName: 'results.xml'}],
         ['jest-silent-reporter', {useDots: true}],
     ],
 };

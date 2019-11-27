@@ -1,23 +1,14 @@
-orbs:
-    codecov: codecov/codecov@1.0.5
-
 aliases:
     - &job-defaults
         working_directory: ~/semaphore
         docker:
-            # specify the version you desire here
             - image: circleci/node:12.13
 
     - &yarn-install
         run:
             name: Running Yarn install
-            command: |
-                # Yarn's requests sometimes take more than 10mins to complete.
-                # Print something to stdout, to prevent CircleCI from failing due to not output.
-                while true; do sleep 60; echo "[`date`] Keeping alive..."; done &
-                KEEP_ALIVE_PID=$!
-                yarn install --frozen-lockfile --non-interactive
-                kill $KEEP_ALIVE_PID
+            command: yarn install --frozen-lockfile --non-interactive
+
 
     - &restore-cache
         name: Restore Yarn Package Cache
@@ -31,18 +22,12 @@ aliases:
         paths: node_modules
         key: yarn-packages-{{ .Branch }}-{{ checksum "yarn.lock" }}
 
-    # Branch filter that can be specified for jobs that should only run on publish branches
-    # (e.g. master )
     - &release_branches_filter
         branches:
             only:
                 - master
                 - /rc-.*/
 
-    # Workspace initially persisted by the `install` job, and then enhanced by `test_aio` and
-    # `build-npm-packages`.
-    # https://circleci.com/docs/2.0/workflows/#using-workspaces-to-share-data-among-jobs
-    # https://circleci.com/blog/deep-diving-into-circleci-workspaces/
     - &attach-workspace
         attach_workspace:
             at: ~/
@@ -56,9 +41,6 @@ jobs:
             - restore_cache: *restore-cache
             - *yarn-install
             - save_cache: *save-cache
-            # Persist any changes at this point to be reused by further jobs.
-            # **NOTE 1 **: Folders persisted here should be kept in sync with `var_13: &attach_workspace`.
-            # **NOTE 2 **: To add new content to the workspace, always persist on the same root.
             - persist_to_workspace:
                 root: ~/
                 paths:
@@ -68,9 +50,9 @@ jobs:
         <<: *job-defaults
         steps:
             - *attach-workspace
-            - run: yarn lint --format junit -o reports/junit/js-lint-results.xml
+            - run: yarn lint:ci
             - store_test_results:
-                path: reports/junit
+                path: reports
 
     test:
         <<: *job-defaults
@@ -79,17 +61,12 @@ jobs:
             - run:
                 command: yarn test:ci
             - store_test_results:
-                path: reports/junit
-            - codecov/upload:
-                file: coverage/*.json
-                flags: unittests
+                path: reports
 
     check-dependencies:
         <<: *job-defaults
         steps:
             - *attach-workspace
-            - run:
-                command: ls -la
             - run:
                 command: yarn check-dependencies
 
