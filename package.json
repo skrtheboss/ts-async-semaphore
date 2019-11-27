@@ -33,36 +33,54 @@
     ],
     "scripts": {
         "serve": "tsc -w",
-        "build": " tsc",
-        "lint": "tslint src/**/*.ts",
-        "check-dependencies": "dependency-check package.json --no-dev --quiet",
+        "build": "tsc",
+        "lint:ci": "yarn lint --format junit -o reports/tslint/results.xml",
+        "lint": "tslint 'src/**/*.ts'",
+        "format": "prettier --write \"src/**/*.ts\" \"test/**/*.ts\"",
+        "check-formatting": "prettier --check \"src/**/*.ts\" \"test/**/*.ts\"",
+        "check-dependencies": "dependency-check package.json --missing --no-dev",
         "test": "jest",
-        "test:ci": "jest --ci --runInBand --coverage --config jest.config.ci.js && codecov",
+        "test:ci": "jest --ci --runInBand --coverage --config jest.config.ci.js | coveralls",
         "clean": "shx rm -rf node_modules/ dist/ docs/ coverage/",
         "doc": "typedoc --out docs --name ts-async-semaphore --tsconfig tsconfig.json",
         "semantic-release": "semantic-release"
     },
     "engines": {
-        "node": ">=8.0.0"
+        "node": ">=12.8.1"
     },
     "dependencies": {
-        "@types/node": "^8.0.0"
+        "@types/node": "^12.12.14"
     },
     "devDependencies": {
-        "@semantic-release/changelog": "3.0.2",
-        "@types/jest": "24.0.13",
-        "codecov": "3.5.0",
-        "condition-circle": "2.0.2",
-        "dependency-check": "3.3.0",
-        "jest": "24.8.0",
-        "jest-junit": "6.4.0",
-        "jest-silent-reporter": "0.1.2",
-        "rimraf": "2.6.3",
-        "semantic-release": "15.13.12",
-        "shx": "0.3.2",
-        "ts-jest": "24.0.2",
-        "tslint": "5.17.0",
-        "typedoc": "0.14.2",
-        "typescript": "3.5.1"
+        "@commitlint/cli": "^8.2.0",
+        "@commitlint/config-conventional": "^8.2.0",
+        "@semantic-release/changelog": "^3.0.6",
+        "@semantic-release/commit-analyzer": "^6.3.3",
+        "@semantic-release/git": "^7.0.18",
+        "@semantic-release/github": "^5.5.5",
+        "@semantic-release/npm": "^5.3.4",
+        "@semantic-release/release-notes-generator": "^7.3.4",
+        "@types/jest": "^24.0.23",
+        "commitlint-circle": "^1.0.0",
+        "condition-circle": "^2.0.2",
+        "coveralls": "^3.0.9",
+        "dependency-check": "^4.1.0",
+        "husky": "^3.1.0",
+        "jest": "^24.9.0",
+        "jest-junit": "^9.0.0",
+        "jest-silent-reporter": "^0.1.2",
+        "prettier": "^1.19.1",
+        "rimraf": "^3.0.0",
+        "semantic-release": "^15.13.31",
+        "shx": "^0.3.2",
+        "ts-jest": "^24.2.0",
+        "tslint": "^5.20.1",
+        "typedoc": "^0.15.3",
+        "typescript": "^3.7.2"
+    },
+    "husky": {
+        "hooks": {
+            "commit-msg": "commitlint -E HUSKY_GIT_PARAMS && yarn check-formatting && yarn lint"
+        }
     }
 }

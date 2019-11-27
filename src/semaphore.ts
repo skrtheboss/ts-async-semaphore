@@ -5,9 +5,8 @@ interface Acquirer {
     handler: Handler;
 }
 
-function checkValidPermits(permits): void {
+function checkValidPermits(permits: number): void {
     if (permits < 0) throw new TypeError('Permits can not be below 0!');
-
 }
 
 /**
@@ -103,7 +102,7 @@ export class Semaphore {
      * @return the collection of acquirers
      */
     public getQueuedAcquirers(): Handler[] {
-        return this.acquirers.map(({handler}) => handler);
+        return this.acquirers.map(({ handler }) => handler);
     }
 
     /**
@@ -144,7 +143,7 @@ export class Semaphore {
         }
 
         let timerId: any;
-        const {promise, acquirer} = this.getAcquirePromise(permits);
+        const { promise, acquirer } = this.getAcquirePromise(permits);
 
         const timeoutPromise = new Promise<false>(resolve => {
             timerId = setTimeout(() => resolve(false), timeoutMs);
@@ -245,27 +244,27 @@ export class Semaphore {
             /**
              * for scope handling for non-blocking calling
              */
-            function next(handler) {
-                process.nextTick(function callAcquirer() {
+            function next(handler: Handler) {
+                process.nextTick(function callAcquirer(this: unknown) {
                     handler.call(this, true);
                 });
             }
 
-            (next)(acquirer.handler);
+            next(acquirer.handler);
         }
     }
 
     /** @internal */
-    private getAcquirePromise(permits: number): { promise: Promise<true>, acquirer: Acquirer } {
-        let acquirer: Acquirer = null;
+    private getAcquirePromise(permits: number): { promise: Promise<true>; acquirer: Acquirer } {
+        let acquirer: Acquirer | null = null;
 
         const promise = new Promise<true>(handler => {
-            acquirer = {permits, handler};
+            acquirer = { permits, handler };
             this.acquirers.push(acquirer);
 
             this._checkSemaphore();
         });
 
-        return {promise, acquirer};
+        return { promise, acquirer: acquirer as any };
     }
 }
