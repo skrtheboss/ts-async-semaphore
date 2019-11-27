@@ -50,7 +50,12 @@ jobs:
         <<: *job-defaults
         steps:
             - *attach-workspace
-            - run: yarn lint:ci
+            - run:
+                name: Lint
+                command: yarn lint:ci
+            - run:
+                name: Lint Commits
+                command: yarn commitlint-circle
             - store_test_results:
                 path: reports
 
