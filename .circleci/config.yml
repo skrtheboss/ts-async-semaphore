@@ -70,6 +70,13 @@ jobs:
             - run:
                 command: yarn check-dependencies
 
+    check-format:
+        <<: *job-defaults
+        steps:
+            - *attach-workspace
+            - run:
+                command: yarn check-formatting
+
     doc:
         <<: *job-defaults
         steps:
@@ -112,6 +119,9 @@ workflows:
                 requires:
                     - setup
             - build:
+                requires:
+                    - setup
+            - check-format:
                 requires:
                     - setup
             - check-dependencies:
