@@ -34,10 +34,11 @@
     "scripts": {
         "serve": "tsc -w",
         "build": "tsc",
+        "lint:ci": "yarn lint --format junit -o reports/tslint/results.xml",
         "lint": "tslint 'src/**/*.ts'",
         "check-dependencies": "dependency-check package.json --missing --no-dev",
         "test": "jest",
-        "test:ci": "jest --ci --runInBand --coverage --config jest.config.ci.js && codecov",
+        "test:ci": "jest --ci --runInBand --coverage --config jest.config.ci.js | coveralls",
         "clean": "shx rm -rf node_modules/ dist/ docs/ coverage/",
         "doc": "typedoc --out docs --name ts-async-semaphore --tsconfig tsconfig.json",
         "semantic-release": "semantic-release"
@@ -51,8 +52,8 @@
     "devDependencies": {
         "@semantic-release/changelog": "^3.0.6",
         "@types/jest": "^24.0.23",
-        "codecov": "^3.6.1",
         "condition-circle": "^2.0.2",
+        "coveralls": "^3.0.9",
         "dependency-check": "^4.1.0",
         "jest": "^24.9.0",
         "jest-junit": "^9.0.0",
