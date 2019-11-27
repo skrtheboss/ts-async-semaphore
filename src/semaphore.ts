@@ -5,7 +5,7 @@ interface Acquirer {
     handler: Handler;
 }
 
-function checkValidPermits(permits): void {
+function checkValidPermits(permits: number): void {
     if (permits < 0) throw new TypeError('Permits can not be below 0!');
 }
 
@@ -244,8 +244,8 @@ export class Semaphore {
             /**
              * for scope handling for non-blocking calling
              */
-            function next(handler) {
-                process.nextTick(function callAcquirer() {
+            function next(handler: Handler) {
+                process.nextTick(function callAcquirer(this: unknown) {
                     handler.call(this, true);
                 });
             }
@@ -256,7 +256,7 @@ export class Semaphore {
 
     /** @internal */
     private getAcquirePromise(permits: number): { promise: Promise<true>; acquirer: Acquirer } {
-        let acquirer: Acquirer = null;
+        let acquirer: Acquirer | null = null;
 
         const promise = new Promise<true>(handler => {
             acquirer = { permits, handler };
@@ -265,6 +265,6 @@ export class Semaphore {
             this._checkSemaphore();
         });
 
-        return { promise, acquirer };
+        return { promise, acquirer: acquirer as any };
     }
 }
