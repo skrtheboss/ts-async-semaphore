@@ -1,6 +1,6 @@
 import { Semaphore } from './semaphore';
 
-const awaitTime = (ms: number) => new Promise(resolve => setTimeout(resolve, ms));
+const awaitTime = (ms: number): Promise<void> => new Promise(resolve => setTimeout(resolve, ms));
 
 jest.setTimeout(20);
 
@@ -60,7 +60,7 @@ describe('Semaphore', () => {
 
     test('expect _checkSemaphore() to be called only after action triggered', async () => {
         const semaphore = new Semaphore(0);
-
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
         const checkSemaphore = jest.spyOn(semaphore as any, '_checkSemaphore');
 
         await awaitTime(10);
@@ -139,6 +139,7 @@ describe('Semaphore', () => {
 
         await Promise.all([
             expect(semaphore.tryAcquire(2, 10)).resolves.toBeFalsy(),
+            // eslint-disable-next-line @typescript-eslint/no-explicit-any
             (semaphore as any).acquirers.splice(0, 1)
         ]);
     });
