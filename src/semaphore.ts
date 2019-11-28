@@ -142,6 +142,7 @@ export class Semaphore {
             return false;
         }
 
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
         let timerId: any;
         const { promise, acquirer } = this.getAcquirePromise(permits);
 
@@ -244,7 +245,7 @@ export class Semaphore {
             /**
              * for scope handling for non-blocking calling
              */
-            function next(handler: Handler) {
+            function next(handler: Handler): void {
                 process.nextTick(function callAcquirer(this: unknown) {
                     handler.call(this, true);
                 });
@@ -265,6 +266,6 @@ export class Semaphore {
             this._checkSemaphore();
         });
 
-        return { promise, acquirer: acquirer as any };
+        return { promise, acquirer: (acquirer as unknown) as Acquirer };
     }
 }
