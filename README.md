@@ -23,10 +23,10 @@
   <a href="https://www.npmjs.org/package/ts-async-semaphore">
     <img alt="npm version" src="http://img.shields.io/npm/v/ts-async-semaphore.svg?style=flat-square&logo=npm">
   </a>
-  <a href="https://bundlephobia.com/result?p=ts-async-semaphore@1.0.1">
+  <a href="https://bundlephobia.com/result?p=ts-async-semaphore">
     <img alt="Minified size" src="https://img.shields.io/bundlephobia/min/ts-async-semaphore?style=flat-square">
   </a>
-  <a href="https://bundlephobia.com/result?p=ts-async-semaphore@1.0.1">
+  <a href="https://bundlephobia.com/result?p=ts-async-semaphore">
     <img alt="Minified-Zipped size" src="https://img.shields.io/bundlephobia/minzip/ts-async-semaphore?style=flat-square">
   </a>
   <a href="https://github.com/semantic-release/semantic-release">
