@@ -4,7 +4,7 @@
   <a href="https://circleci.com/gh/skrtheboss/ts-async-semaphore">
     <img alt="CircleCi Build Status" src="https://img.shields.io/circleci/build/github/skrtheboss/ts-async-semaphore/master?token=abc123def456&style=flat-square&logo=CircleCi">
   </a>
-  <a href="https://codecov.io/gh/skrtheboss/ts-async-semaphore">
+  <a href="https://coveralls.io/github/skrtheboss/ts-async-semaphore">
     <img alt="Codecov Coverage Status" src="https://img.shields.io/coveralls/github/skrtheboss/ts-async-semaphore/master?style=flat-square&logo=Coveralls">
   </a>
   <a href="https://nodejs.org/">
