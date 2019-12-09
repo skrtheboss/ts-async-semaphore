@@ -49,7 +49,7 @@
         "node": ">=12.8.1"
     },
     "dependencies": {
-        "@types/node": "^12.12.14"
+        "@types/node": "^12.12.15"
     },
     "devDependencies": {
         "@commitlint/cli": "^8.2.0",
