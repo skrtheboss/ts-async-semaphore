@@ -77,7 +77,7 @@
         "semantic-release": "^15.14.0",
         "shx": "^0.3.2",
         "ts-jest": "^24.2.0",
-        "typedoc": "^0.15.5",
+        "typedoc": "^0.15.6",
         "typescript": "^3.7.4"
     },
     "husky": {
