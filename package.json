@@ -52,8 +52,8 @@
         "@types/node": "^12.12.22"
     },
     "devDependencies": {
-        "@commitlint/cli": "^8.2.0",
-        "@commitlint/config-conventional": "^8.2.0",
+        "@commitlint/cli": "^8.3.4",
+        "@commitlint/config-conventional": "^8.3.4",
         "@semantic-release/commit-analyzer": "^6.3.3",
         "@semantic-release/github": "^5.5.5",
         "@semantic-release/npm": "^5.3.5",
