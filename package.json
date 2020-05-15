@@ -76,7 +76,7 @@
         "rimraf": "^3.0.1",
         "semantic-release": "^17.0.0",
         "shx": "^0.3.2",
-        "ts-jest": "^24.3.0",
+        "ts-jest": "^25.5.1",
         "typedoc": "^0.16.9",
         "typescript": "^3.7.5"
     },
