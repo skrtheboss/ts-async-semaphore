@@ -72,7 +72,7 @@
         "jest": "^24.9.0",
         "jest-junit": "^10.0.0",
         "jest-silent-reporter": "^0.1.2",
-        "prettier": "^1.19.1",
+        "prettier": "^2.2.1",
         "rimraf": "^3.0.1",
         "semantic-release": "^17.0.0",
         "shx": "^0.3.2",
