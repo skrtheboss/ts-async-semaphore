@@ -124,7 +124,7 @@ describe('Semaphore', () => {
 
         await Promise.all([
             expect(semaphore.tryAcquire(2, 10)).resolves.toBeTruthy(),
-            awaitTime(5).then(() => semaphore.release(2))
+            awaitTime(5).then(() => semaphore.release(2)),
         ]);
     });
 
@@ -140,7 +140,7 @@ describe('Semaphore', () => {
         await Promise.all([
             expect(semaphore.tryAcquire(2, 10)).resolves.toBeFalsy(),
             // eslint-disable-next-line @typescript-eslint/no-explicit-any
-            (semaphore as any).acquirers.splice(0, 1)
+            (semaphore as any).acquirers.splice(0, 1),
         ]);
     });
 

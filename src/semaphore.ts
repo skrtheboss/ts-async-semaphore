@@ -162,7 +162,7 @@ export class Semaphore {
             promise.then(() => {
                 clearTimeout(timerId);
                 return true;
-            })
+            }),
         ]);
     }
 
