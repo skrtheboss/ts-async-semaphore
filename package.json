@@ -42,8 +42,9 @@
         "test": "jest",
         "test:ci": "jest --ci --runInBand --coverage --config jest.config.ci.js | coveralls",
         "clean": "shx rm -rf node_modules/ dist/ docs/ coverage/",
-        "doc": "typedoc --out docs --name ts-async-semaphore --tsconfig tsconfig.json",
-        "semantic-release": "semantic-release"
+        "doc": "typedoc --out docs --name ts-async-semaphore --tsconfig tsconfig.json --entryPoints src/semaphore.ts",
+        "semantic-release": "semantic-release",
+        "postinstall": "husky install"
     },
     "engines": {
         "node": ">=14.5.0"
