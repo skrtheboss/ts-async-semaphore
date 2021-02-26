@@ -1,36 +1,35 @@
 aliases:
     - &job-defaults
-        working_directory: ~/semaphore
-        docker:
-            - image: circleci/node:12.13
+      working_directory: ~/semaphore
+      docker:
+          - image: circleci/node:14.5.0
 
     - &yarn-install
-        run:
-            name: Running Yarn install
-            command: yarn install --frozen-lockfile --non-interactive
-
+      run:
+          name: Running Yarn install
+          command: yarn install --frozen-lockfile --non-interactive
 
     - &restore-cache
-        name: Restore Yarn Package Cache
-        keys:
-            - yarn-packages-{{ .Branch }}-{{ checksum "yarn.lock" }}
-            # Fallback in case checksum fails
-            - yarn-packages-{{ .Branch }}-
+      name: Restore Yarn Package Cache
+      keys:
+          - yarn-packages-{{ .Branch }}-{{ checksum "yarn.lock" }}
+          # Fallback in case checksum fails
+          - yarn-packages-{{ .Branch }}-
 
     - &save-cache
-        name: Save Yarn Package Cache
-        paths: node_modules
-        key: yarn-packages-{{ .Branch }}-{{ checksum "yarn.lock" }}
+      name: Save Yarn Package Cache
+      paths: node_modules
+      key: yarn-packages-{{ .Branch }}-{{ checksum "yarn.lock" }}
 
     - &release_branches_filter
-        branches:
-            only:
-                - master
-                - /rc-.*/
+      branches:
+          only:
+              - master
+              - /rc-.*/
 
     - &attach-workspace
-        attach_workspace:
-            at: ~/
+      attach_workspace:
+          at: ~/
 
 version: 2.1
 jobs:
@@ -42,65 +41,65 @@ jobs:
             - *yarn-install
             - save_cache: *save-cache
             - persist_to_workspace:
-                root: ~/
-                paths:
-                - ./semaphore
+                  root: ~/
+                  paths:
+                      - ./semaphore
 
     lint:
         <<: *job-defaults
         steps:
             - *attach-workspace
             - run:
-                name: Lint
-                command: yarn lint:ci
+                  name: Lint
+                  command: yarn lint:ci
             - run:
-                name: Lint Commits
-                command: yarn commitlint-circle
+                  name: Lint Commits
+                  command: yarn commitlint-circle
             - store_test_results:
-                path: reports
+                  path: reports
 
     test:
         <<: *job-defaults
         steps:
             - *attach-workspace
             - run:
-                command: yarn test:ci
+                  command: yarn test:ci
             - store_test_results:
-                path: reports
+                  path: reports
 
     check-dependencies:
         <<: *job-defaults
         steps:
             - *attach-workspace
             - run:
-                command: yarn check-dependencies
+                  command: yarn check-dependencies
 
     check-format:
         <<: *job-defaults
         steps:
             - *attach-workspace
             - run:
-                command: yarn check-formatting
+                  command: yarn check-formatting
 
     doc:
         <<: *job-defaults
         steps:
             - *attach-workspace
             - run:
-                command: yarn doc
+                  command: yarn doc
             - store_artifacts:
-                path: docs
+                  path: docs
 
     build:
         <<: *job-defaults
         steps:
             - *attach-workspace
             - run:
-                command: yarn build
+                  command: yarn build
             - persist_to_workspace:
                   root: ~/
                   paths:
-                  - ./semaphore/dist
+                      - ./semaphore/dist
 
     release:
         <<: *job-defaults
@@ -115,29 +114,28 @@ workflows:
         jobs:
             - setup
             - lint:
-                requires:
-                    - setup
+                  requires:
+                      - setup
             - test:
-                requires:
-                    - setup
+                  requires:
+                      - setup
             - doc:
-                requires:
-                    - setup
+                  requires:
+                      - setup
             - build:
-                requires:
-                    - setup
+                  requires:
+                      - setup
             - check-format:
-                requires:
-                    - setup
+                  requires:
+                      - setup
             - check-dependencies:
-                requires:
-                    - build
+                  requires:
+                      - build
             - release:
-                filters:
-                    *release_branches_filter
-                requires:
-                    - lint
-                    - test
-                    - doc
-                    - build
-                    - check-dependencies
+                  filters: *release_branches_filter
+                  requires:
+                      - lint
+                      - test
+                      - doc
+                      - build
+                      - check-dependencies

@@ -55,55 +55,52 @@ Install the module via npm:
 ```typescript
 // fairness false
 
-import {Semaphore} from 'ts-async-semaphore';
+import { Semaphore } from 'ts-async-semaphore';
 const semaphore = new Semaphore(0);
 
 semaphore.acquire(2).then(() => {
-  console.log('Hello');
+    console.log('Hello');
 });
 
 semaphore.acquire().then(() => {
-  console.log('World');
+    console.log('World');
 
-  semaphore.release(2);
+    semaphore.release(2);
 });
 
-setTimeout(function() {
-  semaphore.release();
+setTimeout(function () {
+    semaphore.release();
 }, 2000);
-
 ```
 
 ```typescript
 // fairness true
 
-import {Semaphore} from 'ts-async-semaphore';
+import { Semaphore } from 'ts-async-semaphore';
 const semaphore = new Semaphore(0, true);
 
 semaphore.acquire(2).then(() => {
-  console.log('Hello');
+    console.log('Hello');
 });
 
 semaphore.acquire().then(() => {
     console.log('World');
-})
+});
 
 semaphore.release(1);
 
-setTimeout(function() {
-  semaphore.release(2);
+setTimeout(function () {
+    semaphore.release(2);
 }, 2000);
-
 ```
 
 ```typescript
-import {Semaphore} from 'ts-async-semaphore';
+import { Semaphore } from 'ts-async-semaphore';
 const semaphore = new Semaphore(0, true);
 
-semaphore.tryAcquire(1 , 50).then(val => {
+semaphore.tryAcquire(1, 50).then(val => {
     console.log(`Acquire ${val ? 'success' : 'fail'}`);
-})
-
+});
 ```
 
 ## Documentation
@@ -130,8 +127,7 @@ Acquires the given number of permits from this semaphore.
 
 `permits: number` The number of permits to acquire. `Default: 0`.
 
-Returns: `Promise<void>`
----
+## Returns: `Promise<void>`
 
 #### #getQueuedAcquirers()
 
@@ -181,4 +177,3 @@ Acquires the given number of permits from this semaphore.
 `timeoutMs: number` The timeout after which the acquire will fail
 
 Returns: `Boolean` Promise `true` if success, `false` false if fail
-

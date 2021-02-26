@@ -3,11 +3,7 @@ module.exports = {
     preset: 'ts-jest',
     testEnvironment: 'node',
     testMatch: ['**/src/**/*.spec.ts'],
-    collectCoverageFrom: [
-        '**/src/**/*.{ts,js}',
-        '!**/src/**/*.spec.{ts,js}',
-        '!**/node_modules/**'
-    ],
+    collectCoverageFrom: ['**/src/**/*.{ts,js}', '!**/src/**/*.spec.{ts,js}', '!**/node_modules/**'],
     collectCoverage: true,
     coverageReporters: ['text'],
     coverageThreshold: {
@@ -15,7 +11,7 @@ module.exports = {
             branches: 100,
             functions: 100,
             lines: 100,
-            statements: 100
-        }
-    }
+            statements: 100,
+        },
+    },
 };
