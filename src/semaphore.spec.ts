@@ -20,22 +20,23 @@ describe('Semaphore', () => {
         expect(semaphore.availablePermits()).toEqual(0);
     });
 
-    test('expect acquire() should wait till permits are available', async done => {
+    test('expect acquire() should wait till permits are available', async () => {
         const semaphore = new Semaphore(0);
         const test = jest.fn();
 
         expect(await semaphore.tryAcquire()).toBeFalsy();
 
-        semaphore.acquire().then(() => {
-            expect(test).toBeCalled();
-            done();
-        });
+        const promise = semaphore.acquire();
 
         expect(semaphore.hasQueuedAcquirers()).toBeTruthy();
 
         await awaitTime(10);
         test();
         semaphore.release(1);
+
+        await promise;
+
+        expect(test).toBeCalled();
     });
 
     test('expect reducePermit() to reduce permits', async () => {
