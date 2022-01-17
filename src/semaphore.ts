@@ -266,6 +266,6 @@ export class Semaphore {
             this._checkSemaphore();
         });
 
-        return { promise, acquirer: (acquirer as unknown) as Acquirer };
+        return { promise, acquirer: acquirer as unknown as Acquirer };
     }
 }
