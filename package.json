@@ -44,7 +44,8 @@
         "clean": "shx rm -rf node_modules/ dist/ docs/ coverage/",
         "doc": "typedoc --out docs --name ts-async-semaphore --tsconfig tsconfig.json --entryPoints src/semaphore.ts",
         "semantic-release": "semantic-release",
-        "postinstall": "husky install"
+        "postinstall": "husky install",
+        "prepublishOnly": "scripts/remove-scripts.js"
     },
     "engines": {
         "node": ">=14.5.0"
