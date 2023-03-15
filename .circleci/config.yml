@@ -2,7 +2,7 @@ aliases:
     - &job-defaults
       working_directory: ~/semaphore
       docker:
-          - image: circleci/node:14.18.2
+          - image: circleci/node:17.2.0
 
     - &yarn-install
       run:
