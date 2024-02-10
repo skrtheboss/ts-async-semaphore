@@ -78,7 +78,7 @@
         "semantic-release": "^19.0.5",
         "shx": "^0.3.4",
         "ts-jest": "^29.1.0",
-        "typedoc": "^0.22.17",
+        "typedoc": "^0.25.8",
         "typescript": "~4.5.5"
     }
 }
