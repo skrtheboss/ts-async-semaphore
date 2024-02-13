@@ -13,9 +13,13 @@ function checkValidPermits(permits: number): void {
  * for scope handling for non-blocking calling
  */
 function next(handler: Handler): void {
-    process.nextTick(function callAcquirer(this: unknown) {
-        handler.call(this, true);
-    });
+    typeof process !== 'undefined'
+        ? /* NodeJS.Process */ process.nextTick(function callAcquirer(this: unknown) {
+              handler.call(this, true);
+          })
+        : /* DOM */ queueMicrotask(function callAcquirer(this: unknown) {
+              handler.call(this, true);
+          });
 }
 
 /**
