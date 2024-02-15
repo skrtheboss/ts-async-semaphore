@@ -1,0 +1,40 @@
+{
+    "name": "ts-async-semaphore",
+    "version": "3.0.4",
+    "description": "A counting semaphore for node based on Java's Sempahore.",
+    "main": "dist/semaphore.js",
+    "types": "dist/semaphore.d.ts",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/skrtheboss/ts-async-semaphore.git"
+    },
+    "contributors": [
+        "Denis Frenademetz (https://github.com/skrtheboss)"
+    ],
+    "author": "Denis Frenademetz",
+    "license": "MIT",
+    "private": false,
+    "bugs": {
+        "url": "https://github.com/skrtheboss/ts-async-semaphore/issues"
+    },
+    "homepage": "https://github.com/skrtheboss/ts-async-semaphore#readme",
+    "keywords": [
+        "semaphore",
+        "async",
+        "await",
+        "async-semaphore",
+        "ts-async-semaphore",
+        "permits-semaphore",
+        "credits-semaphore",
+        "typescript",
+        "java",
+        "java-semaphore",
+        "concurrent"
+    ],
+    "engines": {
+        "node": ">=14.5.0"
+    },
+    "dependencies": {
+        "tslib": "2.6.2"
+    }
+}

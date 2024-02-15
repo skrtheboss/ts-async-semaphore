@@ -10,6 +10,15 @@ function checkValidPermits(permits: number): void {
 }
 
 /**
+ * for scope handling for non-blocking calling
+ */
+function next(handler: Handler): void {
+    process.nextTick(function callAcquirer(this: unknown) {
+        handler.call(this, true);
+    });
+}
+
+/**
  * A counting semaphore based on Java's Concurrent Semaphore.
  */
 export class Semaphore {
@@ -146,7 +155,7 @@ export class Semaphore {
         let timerId: any;
         const { promise, acquirer } = this.getAcquirePromise(permits);
 
-        const timeoutPromise = new Promise<false>(resolve => {
+        const timeoutPromise = new Promise<false>((resolve) => {
             timerId = setTimeout(() => resolve(false), timeoutMs);
         });
 
@@ -242,15 +251,6 @@ export class Semaphore {
             len--;
             this.available -= acquirer.permits;
 
-            /**
-             * for scope handling for non-blocking calling
-             */
-            function next(handler: Handler): void {
-                process.nextTick(function callAcquirer(this: unknown) {
-                    handler.call(this, true);
-                });
-            }
-
             next(acquirer.handler);
         }
     }
@@ -259,7 +259,7 @@ export class Semaphore {
     private getAcquirePromise(permits: number): { promise: Promise<true>; acquirer: Acquirer } {
         let acquirer: Acquirer | null = null;
 
-        const promise = new Promise<true>(handler => {
+        const promise = new Promise<true>((handler) => {
             acquirer = { permits, handler };
             this.acquirers.push(acquirer);
 

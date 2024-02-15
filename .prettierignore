@@ -1,2 +1,8 @@
-dist
-docs
+# Add files here to ignore them from prettier formatting
+
+/dist
+/coverage
+
+pnpm-lock.yaml
+
+/.nx/cache

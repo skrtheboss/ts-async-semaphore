@@ -1,0 +1,47 @@
+{
+    "name": "ts-async-semaphore",
+    "$schema": "../../node_modules/nx/schemas/project-schema.json",
+    "sourceRoot": "packages/ts-async-semaphore/src",
+    "projectType": "library",
+    "targets": {
+        "build": {
+            "executor": "@nx/js:tsc",
+            "outputs": ["{options.outputPath}"],
+            "options": {
+                "outputPath": "dist/packages/ts-async-semaphore",
+                "main": "packages/ts-async-semaphore/src/index.ts",
+                "tsConfig": "packages/ts-async-semaphore/tsconfig.lib.json",
+                "assets": ["packages/ts-async-semaphore/*.md", "LICENSE"]
+            }
+        },
+        "lint": {
+            "executor": "@nx/eslint:lint",
+            "outputs": ["{options.outputFile}"],
+            "options": {
+                "lintFilePatterns": ["packages/ts-async-semaphore/**/*.ts", "packages/ts-async-semaphore/package.json"]
+            }
+        },
+        "test": {
+            "executor": "@nx/jest:jest",
+            "outputs": ["{workspaceRoot}/coverage/packages/ts-async-semaphore"],
+            "options": {
+                "jestConfig": "packages/ts-async-semaphore/jest.config.ts",
+                "passWithNoTests": true
+            },
+            "configurations": {
+                "ci": {
+                    "ci": true,
+                    "code-coverage": true
+                }
+            }
+        },
+        "publish-to-npm": {
+            "executor": "nx:run-commands",
+            "options": {
+                "cwd": "./dist/packages/ts-async-semaphore",
+                "command": "pnpm publish --access public ."
+            }
+        }
+    },
+    "tags": []
+}

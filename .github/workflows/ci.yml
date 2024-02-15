@@ -1,0 +1,30 @@
+name: CI
+
+on:
+    push:
+        branches:
+            - main
+    pull_request:
+
+concurrency:
+    group: ${{ github.workflow }}-${{ github.event.number || github.ref }}
+    cancel-in-progress: true
+
+jobs:
+    main:
+        name: Nx Cloud - Main Job
+        uses: nrwl/ci/.github/workflows/nx-cloud-main.yml@v0.13.1
+        with:
+            node-version: v16.20.2
+            pnpm-version: 8.9.2
+            number-of-agents: 1
+            parallel-commands-on-agents: |
+                pnpm exec nx run-many --targets lint test build --parallel=3
+
+    agents:
+        name: Nx Cloud - Agents
+        uses: nrwl/ci/.github/workflows/nx-cloud-agents.yml@v0.13.1
+        with:
+            node-version: v16.20.2
+            pnpm-version: 8.9.2
+            number-of-agents: 1
