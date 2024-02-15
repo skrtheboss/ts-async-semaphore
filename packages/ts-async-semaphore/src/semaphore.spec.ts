@@ -1,6 +1,6 @@
 import { Semaphore } from './semaphore';
 
-const awaitTime = (ms: number): Promise<void> => new Promise(resolve => setTimeout(resolve, ms));
+const awaitTime = (ms: number): Promise<void> => new Promise((resolve) => setTimeout(resolve, ms));
 
 jest.setTimeout(20);
 

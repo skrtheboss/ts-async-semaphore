@@ -1,0 +1,59 @@
+{
+    "root": true,
+    "ignorePatterns": ["**/*"],
+    "plugins": ["@nx", "import", "simple-import-sort", "unicorn"],
+    "overrides": [
+        {
+            "files": ["*.ts", "*.tsx", "*.js", "*.jsx"],
+            "rules": {
+                "@nx/enforce-module-boundaries": [
+                    "error",
+                    {
+                        "enforceBuildableLibDependency": true,
+                        "allow": [],
+                        "depConstraints": [
+                            {
+                                "sourceTag": "*",
+                                "onlyDependOnLibsWithTags": ["*"]
+                            }
+                        ]
+                    }
+                ],
+                "import/no-duplicates": [
+                    "error",
+                    {
+                        "prefer-inline": true
+                    }
+                ],
+                "simple-import-sort/imports": "error",
+                "simple-import-sort/exports": "error",
+                "unicorn/prefer-number-properties": "error",
+                "unicorn/prefer-node-protocol": "error",
+                "unicorn/numeric-separators-style": "error",
+                "curly": ["error", "multi-line", "consistent"]
+            }
+        },
+        {
+            "files": ["*.ts", "*.tsx"],
+            "extends": ["plugin:@nx/typescript"],
+            "rules": {}
+        },
+        {
+            "files": ["*.js", "*.jsx"],
+            "extends": ["plugin:@nx/javascript"],
+            "rules": {}
+        },
+        {
+            "files": "*.json",
+            "parser": "jsonc-eslint-parser",
+            "rules": {}
+        },
+        {
+            "files": ["*.json"],
+            "parser": "jsonc-eslint-parser",
+            "rules": {
+                "@nx/dependency-checks": "error"
+            }
+        }
+    ]
+}
