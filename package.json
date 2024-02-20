@@ -1,6 +1,6 @@
 {
     "name": "ts-async-semaphore",
-    "version": "3.0.4",
+    "version": "4.0.0",
     "license": "MIT",
     "scripts": {
         "format": "nx format:write",
@@ -27,6 +27,7 @@
         "@nx/jest": "17.0.2",
         "@nx/js": "17.0.2",
         "@nx/plugin": "17.0.2",
+        "@nx/rollup": "17.0.2",
         "@nx/workspace": "17.0.2",
         "@swc-node/register": "1.6.8",
         "@swc/cli": "0.1.62",
@@ -37,6 +38,7 @@
         "@types/yargs": "17.0.29",
         "@typescript-eslint/eslint-plugin": "5.62.0",
         "@typescript-eslint/parser": "5.62.0",
+        "colorette": "^2.0.20",
         "commitizen": "4.3.0",
         "eslint": "8.52.0",
         "eslint-config-prettier": "9.0.0",

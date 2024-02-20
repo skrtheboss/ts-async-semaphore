@@ -5,13 +5,20 @@
     "projectType": "library",
     "targets": {
         "build": {
-            "executor": "@nx/js:tsc",
+            "executor": "@nx/rollup:rollup",
             "outputs": ["{options.outputPath}"],
             "options": {
                 "outputPath": "dist/packages/ts-async-semaphore",
-                "main": "packages/ts-async-semaphore/src/index.ts",
+                "project": "packages/ts-async-semaphore/package.json",
+                "main": "packages/ts-async-semaphore/src/semaphore.ts",
                 "tsConfig": "packages/ts-async-semaphore/tsconfig.lib.json",
-                "assets": ["packages/ts-async-semaphore/*.md", "LICENSE"]
+                "format": ["esm", "cjs"],
+                "compiler": "tsc",
+                "assets": [
+                    { "input": "./packages/ts-async-semaphore", "glob": "*.md", "output": "./" },
+                    { "input": "./", "glob": "LICENSE", "output": "./" }
+                ],
+                "generateExportsField": true
             }
         },
         "lint": {
