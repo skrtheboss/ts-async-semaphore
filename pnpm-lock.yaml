@@ -63,8 +63,8 @@ devDependencies:
     specifier: 16.18.60
     version: 16.18.60
   '@types/semver':
-    specifier: 7.5.4
-    version: 7.5.4
+    specifier: 7.5.8
+    version: 7.5.8
   '@types/yargs':
     specifier: 17.0.29
     version: 17.0.29
@@ -3079,8 +3079,8 @@ packages:
       '@types/node': 16.18.60
     dev: true
 
-  /@types/semver@7.5.4:
-    resolution: {integrity: sha512-MMzuxN3GdFwskAnb6fz0orFvhfqi752yjaXylr0Rp4oDg5H0Zn1IuyRhDVvYOwAXoJirx2xuS16I3WjxnAIHiQ==}
+  /@types/semver@7.5.8:
+    resolution: {integrity: sha512-I8EUhyrgfLrcTkzV3TSsGyl1tSuPrEDzr0yd5m90UgNxQkyDXULk3b6MlQqTCpZpNtWe1K0hzclnZkTcLBe2UQ==}
     dev: true
 
   /@types/stack-utils@2.0.1:
@@ -3211,7 +3211,7 @@ packages:
     dependencies:
       '@eslint-community/eslint-utils': 4.4.0(eslint@8.52.0)
       '@types/json-schema': 7.0.11
-      '@types/semver': 7.5.4
+      '@types/semver': 7.5.8
       '@typescript-eslint/scope-manager': 5.62.0
       '@typescript-eslint/types': 5.62.0
       '@typescript-eslint/typescript-estree': 5.62.0(typescript@5.2.2)
