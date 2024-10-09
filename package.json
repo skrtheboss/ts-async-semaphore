@@ -41,7 +41,7 @@
         "colorette": "^2.0.20",
         "commitizen": "4.3.0",
         "eslint": "8.52.0",
-        "eslint-config-prettier": "9.0.0",
+        "eslint-config-prettier": "9.1.0",
         "eslint-plugin-import": "^2.29.0",
         "eslint-plugin-simple-import-sort": "^10.0.0",
         "eslint-plugin-unicorn": "^49.0.0",
